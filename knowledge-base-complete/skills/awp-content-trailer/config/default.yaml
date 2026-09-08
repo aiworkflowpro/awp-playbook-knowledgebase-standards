@@ -1,0 +1,45 @@
+# awp-content-trailer config
+
+# --- Data source ---
+brand_dir: knowledge-base/brand/     # where the channel's brand facts live
+input_mode: channel-name             # one input: the channel name
+
+# --- Trailer parameters (defaults that do not change per run) ---
+trailer:
+  duration_seconds: 30
+  segments: 5                        # five segments x ~6 s
+  aspect: "16:9"
+  resolution: "1920x1080"
+  fps: 30
+  narration_words_total: 60          # hard ceiling: 2.5 words/s x 30 s x 80% for pauses
+  target_words_per_line: 12          # 60 / 5 lines
+
+# --- Story beats across the five segments ---
+beats:
+  - hook        # 0-6 s   - stop the scroll
+  - context     # 6-12 s  - who this is for, the pain
+  - value       # 12-18 s - what the viewer gets
+  - proof       # 18-24 s - hands-on evidence, credibility
+  - ask         # 24-30 s - subscribe / follow, end card
+
+# --- Video generator (adapter) ---
+generator:
+  enabled: false                     # false = prompts-only mode, stop after step06
+  adapter: null                      # e.g. "minimax-h3", "seedance", "veo" - set with enabled: true
+  host: null                         # API host when a generator is configured
+  submit_prompts: true               # full mode only: submit compiled prompts
+
+# --- Assembly (full mode only) ---
+assemble:
+  transition: crossfade
+  transition_seconds: 0.5
+  target_duration: 30
+
+# --- Delivery (full mode only) ---
+audio:
+  narration_lufs: -14
+  subtitles: true
+  music_volume: 0.08
+
+# --- Output ---
+output_root: knowledge-base/business/youtube/channel-trailer/   # one run folder per channel name

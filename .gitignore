@@ -1,0 +1,34 @@
+# Your knowledge base lives here. The folder is tracked, its contents are not —
+# nothing you write while following this playbook gets committed back to the repo.
+knowledge-base/*
+!knowledge-base/.gitkeep
+
+# Skill run artifacts
+# Video artifacts produced by the trailer Skill example. Anchored on purpose —
+# a bare `output/` also matches knowledge-base-starter/dashboard/output/.
+course/examples/04-trailer-skill/output/
+course/examples/04-trailer-skill/runs/
+*.mp4
+*.wav
+*.srt
+
+# Credentials — never commit these
+.env
+.env.*
+credentials/
+*.key
+*.pem
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,1 @@
+Research how people organize knowledge for AI agents in 2026. Compare different approaches like CLAUDE.md, Cursor rules, Cline memory bank, Notion AI, and file-based knowledge bases. What are the pros and cons of each? Which approach is best for a solo creator who uses multiple AI tools?
