@@ -1,10 +1,47 @@
-# Copy this file verbatim into any aiworkflowpro repo as .github/workflows/commit-identity.yml
+# Self-contained copy for repos that cannot call the reusable workflow
+# (public repos may not call reusable workflows living in a private repo).
+# Drop this file into any aiworkflowpro repo as .github/workflows/commit-identity.yml
+# and keep it byte-identical to this template; the reusable commit-identity.yml
+# next to it is the same check, for private-to-private callers.
 name: Commit identity
+
 on:
   push:
   pull_request:
+
 permissions:
   contents: read
+
+env:
+  EXPECTED_EMAIL: 29949230+aiworkflowpro@users.noreply.github.com
+
 jobs:
   identity:
-    uses: aiworkflowpro/.github/.github/workflows/commit-identity.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+      - name: Every commit in history carries the owner e-mail
+        shell: bash
+        run: |
+          set -euo pipefail
+          bad=0
+          while IFS=$'\t' read -r sha ae an ce cn; do
+            for pair in "author|$ae|$an" "committer|$ce|$cn"; do
+              IFS='|' read -r role email name <<<"$pair"
+              case "$email" in
+                "$EXPECTED_EMAIL") continue ;;
+                *"[bot]@users.noreply.github.com") continue ;;
+                "noreply@github.com") continue ;;
+              esac
+              printf '::error::%s %s %s <%s>\n' "$sha" "$role" "$name" "$email"
+              bad=$((bad + 1))
+            done
+          done < <(git log --all --format='%h%x09%ae%x09%an%x09%ce%x09%cn')
+          if (( bad )); then
+            echo "::error::$bad author/committer field(s) are not <$EXPECTED_EMAIL>"
+            echo "Fix: rewrite those commits before this history goes public."
+            exit 1
+          fi
+          echo "all $(git rev-list --all --count) commits signed by <$EXPECTED_EMAIL>"
