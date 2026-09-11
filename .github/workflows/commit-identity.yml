@@ -45,3 +45,22 @@ jobs:
             exit 1
           fi
           echo "all $(git rev-list --all --count) commits signed by <$EXPECTED_EMAIL>"
+      - name: No AI-tool attribution in any commit message
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Brand identity only: no "Co-authored-by: Claude/Cursor/Codex/…", no "Generated with Claude Code".
+          pat='^[[:space:]]*(co-authored-by|made-with|generated-by|assisted-by):[[:space:]]*.*(claude|anthropic|cursor|codex|openai|chatgpt|copilot|gemini|antigravity|aider)|^[[:space:]]*[^[:alnum:]]*(generated|created|written|made)[[:space:]]+(with|by)[[:space:]]+.*(claude|cursor|codex|copilot|gemini)'
+          bad=0
+          while IFS= read -r sha; do
+            while IFS= read -r line; do
+              if printf '%s' "$line" | grep -qiE "$pat"; then
+                printf '::error::%s message: %s\n' "${sha:0:10}" "$line"; bad=$((bad + 1))
+              fi
+            done < <(git log -1 --format=%B "$sha")
+          done < <(git rev-list --all)
+          if (( bad )); then
+            echo "::error::$bad AI-tool attribution line(s) found in commit messages"
+            exit 1
+          fi
+          echo "no AI-tool attribution lines in $(git rev-list --all --count) commits"
