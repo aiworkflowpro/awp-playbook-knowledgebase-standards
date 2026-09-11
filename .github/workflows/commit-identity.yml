@@ -1,0 +1,10 @@
+# Copy this file verbatim into any aiworkflowpro repo as .github/workflows/commit-identity.yml
+name: Commit identity
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  identity:
+    uses: aiworkflowpro/.github/.github/workflows/commit-identity.yml@main
