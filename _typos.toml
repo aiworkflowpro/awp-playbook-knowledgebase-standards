@@ -1,0 +1,5 @@
+# Local typos settings
+[default.extend-words]
+alls = "alls"   # "catch-alls"
+SOM = "SOM"     # serviceable obtainable market
+Canva = "Canva" # the design tool

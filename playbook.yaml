@@ -1,0 +1,44 @@
+# Machine-readable metadata for this companion repo.
+# The README "Video -> repo" table, the series course list and the profile
+# directory are generated from this file; edit here first.
+#
+series: knowledgebase
+topic: standards                          # {series}-{topic} is this repo's id; repos have no order
+series_title: "Build a Knowledge Base for AI Agents"
+playlist: https://www.youtube.com/playlist?list=PLCWXPPyW6CWA
+type: K
+title: "Why Your AI Agent Gives Different Answers (3-File Fix)"
+video:
+  id: bpBhRBcKZOc
+  url: https://www.youtube.com/watch?v=bpBhRBcKZOc
+  published: 2026-09-28
+  duration: "25:13"
+  tag: video-knowledgebase-standards
+release: v1.0.0
+article: null                              # the aiworkflowpro.com article; "Full guide" links to the homepage until it is live
+homepage: https://aiworkflowpro.com
+tested_with:
+  - { agent: "Codex", model: "GPT-6-Astra", date: 2026-09-26, scope: "clean Linux machine; Quick Start; prompts 01, 05-08, 12-16, 19, 20; trailer Skill prompts-only incl. step 02 gate and 15 s re-run" }
+  - { agent: "Antigravity CLI", model: "Gemini 3.8 Flash", date: 2026-09-26, scope: "same machine and steps" }
+  - { agent: "bash", model: null, date: 2026-09-25, scope: "manual install: empty, existing, existing Standards section, re-run" }
+chapters:
+  - { t: "0:23", title: "Intro — the same request with and without a Skill", path: prompts/01-trailer-from-channel-positioning.md }
+  - { t: "2:33", title: "01 Concept — why standards matter", path: prompts/02-report-per-standard.md }
+  - { t: "6:13", title: "01 Concept — install the standards", path: README.md#quick-start }
+  - { t: "7:09", title: "02 Meta standard — the standard for standards", path: standards/awp-meta-authoring-standard/std-core-chapter-skeleton.md }
+  - { t: "12:27", title: "02 Meta standard — a cognitive discipline standard", path: examples/cognitive-discipline/README.md }
+  - { t: "15:17", title: "03 Prompt standard — eight parts of a complete prompt", path: standards/awp-prompt-writing-standard/prompt-format-eight-part.md }
+  - { t: "17:36", title: "03 Prompt standard — A/B comparison and audit", path: examples/prompt-comparison/README.md }
+  - { t: "20:41", title: "04 Skill standard — build and run a Skill", path: examples/channel-trailer-skill/README.md }
+topics:
+  - ai-workflow-pro
+  - knowledge-base
+  - claude-code
+  - agents-md
+  - claude-md
+  - agent-skills
+  - claude-skills
+  - prompt-engineering
+  - context-engineering
+  - ai-agents
+description: "AI agent standards that stop repeat mistakes: a meta-standard, prompt standard and Skill standard, installed via AGENTS.md. Claude Code, Codex, Cursor."
