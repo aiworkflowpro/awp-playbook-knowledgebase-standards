@@ -1,0 +1,14 @@
+// Local markdownlint-cli2 settings
+{
+  "config": {
+    "default": true,
+    "MD013": false, // prose is wrapped by hand; long table rows are fine
+    "MD033": false, // the README hero and footer use <picture>, <details> and <div>
+    "MD036": false, // a bold line labels each copyable prompt block
+    "MD041": false, // template/AGENTS.snippet.md is a section, not a document
+    "MD060": false  // table pipe alignment is not enforced
+  },
+  // standards/ and examples/ are published as recorded, and the video quotes their
+  // line counts, so whitespace-only lint fixes are not applied there.
+  "ignores": ["standards/**", "examples/**"]
+}

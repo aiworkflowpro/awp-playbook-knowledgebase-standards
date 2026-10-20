@@ -1,0 +1,26 @@
+# Credentials: never commit these
+.env
+.env.*
+credentials/
+*.key
+*.pem
+
+# Output of running the example Skill inside this repo
+examples/channel-trailer-skill/awp-content-trailer-generating/runs/
+*.mp4
+*.wav
+*.srt
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
